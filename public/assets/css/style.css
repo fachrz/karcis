@@ -1,0 +1,127 @@
+body{
+    background: #fdfdfd !important;
+}
+.logo{
+    font-family: 'Lexend Deca', sans-serif;
+    color: #dc3545 !important;
+}
+.logo span{
+    color: #fff;
+    border: 1px solid;
+    padding:0px 5px;
+    margin: 0px 4px;
+    background: #dc3545;
+}
+
+/* PeTik Login Section */
+.login-container{
+    margin: auto;
+    text-align: center;
+    margin-top: 70px;
+}
+.login-form{
+    max-width: 300px;
+    padding: 10px;
+    margin: auto;
+    border-radius: 6px;
+    text-align: left;
+    border: none !important;
+    box-shadow: 0 10px 40px -10px rgba(0,64,128,.2);
+}
+.login-container i{
+    font-size: 40px;
+}
+.login-container h1{
+    margin-bottom: 30px;
+}
+.register-section{
+    margin-top: 20px;
+}
+.register-section a{
+    color: #dc3545;
+}
+.register-section a:hover{
+    color: #dc3545
+}
+.alert-container{ 
+    max-width: 300px;
+    margin: 0px auto 0px;
+}
+
+/* Register Page */
+.register-form{
+    max-width: 600px;
+    padding: 10px;
+    margin: auto;
+    border-radius: 6px;
+    text-align: left;
+}
+
+
+/* PeTik Navbar */
+.ptk-navbar-wrapper{
+    margin-bottom: 10px !important;
+}
+
+/* PeTik Order Section */
+.ptk-order-wrapper{
+    margin-top: 50px;
+    padding: 0px !important;
+    max-width: 1100px !important;
+}
+.ptk-order-card{
+    margin: 0px;
+    border: none !important;
+    background: #fff !important;
+    box-shadow: 0 10px 40px -10px rgba(0,64,128,.2);
+}
+.ptk-order-header{
+    padding: 0px !important;
+    border: none !important;
+}
+.ptk-order-tabs{
+    padding: 0px;
+    margin: 0px;
+    display: flex;
+}
+.ptk-order-tabs li{
+    list-style-type: none;
+    width: 100%;
+    cursor: pointer;
+}
+.ptk-order-item-active{
+    background: #fff;
+    border: none;
+}
+
+/* PeTik Order Form */
+.ptk-card-body{
+    padding: 0px;
+    margin: 0px;
+}
+
+.ptk-order-form{
+    max-width: inherit;
+}
+
+.ptk-input-form-group{
+    width: 100%;
+    padding: 5px 10px;
+}
+
+.ptk-input{
+    width: 100%;
+    border: none;
+    padding: 10px 0px;
+    font-size: 20px;
+}
+
+.ptk-input-label{
+    margin: 0px;
+    color: #a1a1a1;
+}
+
+.ptk-search-button{
+    float: right;
+    padding: 10px 30px !important;
+}

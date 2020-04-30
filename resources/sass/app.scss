@@ -1,0 +1,29 @@
+// Fonts
+//@import url('https://fonts.googleapis.com/css?family=Nunito');
+
+@import '~startbootstrap-sb-admin-2/vendor/fontawesome-free/scss/fontawesome.scss';
+@import '~startbootstrap-sb-admin-2/vendor/fontawesome-free/scss/solid.scss';
+// Variables
+@import 'variables';
+
+// Bootstrap
+@import "~bootstrap/scss/bootstrap";
+
+@import '~jquery-ui/themes/base/all.css'; 
+
+// Navbar Design
+@import 'assets/navbar.scss';
+
+// Result
+@import 'assets/result.scss';
+
+@import 'assets/pesawat/history.scss';
+
+// countdown;
+@import 'assets/countdown.scss';
+
+@import 'custom';
+
+// All Pesawat Design
+@import 'assets/pesawat/bootstrap.scss';
+

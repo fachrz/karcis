@@ -1,0 +1,22 @@
+.krc-order-form{
+    padding: 20px !important;
+    border: none !important;
+    margin-bottom: 15px !important;
+    box-shadow: $shadow;
+}
+.krc-passenger-type{
+    padding: 10px;
+    border: none !important;
+    background: rgb(216, 216, 216);
+    font-size: 17px;
+    margin: 20px 0px;
+    border-radius: 4px !important;
+    .header{
+        float: left;
+    }
+    .toggle-order{
+        border: 1px solid; 
+        width: 200px; 
+        float: right;
+    }
+}

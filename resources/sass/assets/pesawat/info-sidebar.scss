@@ -1,0 +1,33 @@
+.info-sidebar-wrapper{
+    border: none !important;
+    background: #fff !important;
+}
+
+/* Pricing Details */
+.pd-header{
+    border: none !important;
+}
+.pd-body{
+    .pd-pricing{
+        text-align: right;
+    }
+    .pd-total-text, .pd-total-price{
+        font-size: 20px;
+    }
+    .pd-total-price{
+        color: #5f6caf;
+        font-weight: bold;
+        
+    }
+}
+
+.total-price-removed{
+    color: #000 !important;
+    font-weight: normal !important;
+    font-size: 14.4px !important;
+}
+
+.order-button{
+    padding: 10px;
+    border-radius: 0px 0px 5px 5px !important;
+}

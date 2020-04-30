@@ -1,0 +1,58 @@
+.voucher-wrapper{
+    border: none !important;
+    .voucher-card{
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        border-radius: 6px;
+        background-color: #ff2e63;
+        position: relative;
+        box-shadow: $shadow;
+        text-decoration: none;
+        height: 150px;
+        padding: 10px 15px;
+        border: none !important;
+    }
+    .logo{
+        float: left;
+        color: #fff !important;
+    }
+    .balance{
+        color: #fff !important;
+        float: right;
+        position: relative;
+        font-weight: bold;
+    }
+    .voucher-desc{
+        display: flex;
+        justify-content: center;
+        flex-direction: row;
+        flex-wrap: wrap;
+        .desc{
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            font-family: 'Luckiest Guy', cursive;
+            font-size: 22px;
+            text-align: center;
+            color: #fff;
+            letter-spacing: 3px;
+        }
+    }
+    .button-claim{
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        background: rgb(39,73,109, 0.2);
+        border-radius: 0px 0px 6px 0px;
+        padding: 10px 20px;
+        opacity: 1;
+        color: #fff;
+        &:focus{
+            outline: none !important;
+        }
+    }
+    
+    
+}

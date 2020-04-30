@@ -1,0 +1,16 @@
+@import 'variables';
+@import 'info-sidebar.scss';
+@import 'voucher.scss';
+@import 'orderform.scss';
+
+.order-sidebar{
+    margin-bottom: 15px;
+    box-shadow: $shadow;
+
+    .sidebar-header{
+        padding: 20px 20px 5px;
+        border: none !important;
+        background: none !important;
+    }
+}
+

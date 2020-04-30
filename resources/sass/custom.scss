@@ -1,0 +1,178 @@
+body{
+    background: #fdfdfd !important;
+}
+.logo{
+    font-family: 'Lexend Deca', sans-serif;
+    color: #dc3545 !important;
+}
+.logo span{
+    color: #fff;
+    border: 1px solid;
+    padding:0px 5px;
+    margin: 0px 4px;
+    background: #dc3545;
+}
+
+/* PeTik Login Section */
+
+.login-form{
+    max-width: 300px;
+    padding: 10px;
+    margin: auto;
+    border-radius: 6px;
+    text-align: left;
+    border: none !important;
+    box-shadow: 0 10px 40px -10px rgba(0,64,128,.2);
+}
+.login-container i{
+    font-size: 40px;
+}
+.login-container h1{
+    margin-bottom: 30px;
+}
+.register-section{
+    margin-top: 20px;
+}
+.register-section a{
+    color: #dc3545;
+}
+.register-section a:hover{
+    color: #dc3545
+}
+.alert-container{ 
+    max-width: 300px;
+    margin: 0px auto 0px;
+}
+
+/* Register Page */
+.register-form{
+    max-width: 600px;
+    padding: 10px;
+    margin: auto;
+    border-radius: 6px;
+    text-align: left;
+}
+
+
+/* PeTik Order Section */
+.ptk-order-wrapper{
+    margin-top: 50px;
+    padding: 0px !important;
+    max-width: 1100px !important;
+}
+.ptk-order-card{
+    margin: 0px;
+    border: none !important;
+    background: #fff !important;
+    box-shadow: 0 10px 40px -10px rgba(0,64,128,.2);
+}
+.krc-order-header{
+    padding: 0px !important;
+    border: none !important;
+}
+.ptk-order-tabs{
+    padding: 0px;
+    margin: 0px;
+    display: flex;
+}
+.ptk-order-tabs li{
+    list-style-type: none;
+    width: 100%;
+    cursor: pointer;
+}
+.krc-order-item-active{
+    background: $primary;
+    border-radius: 5px 0px 0px 0px;
+    color: $white;
+}
+.kereta-active{
+    border-radius: 0px 5px 0px 0px;
+}
+
+/* PeTik Search Form */
+.krc-card-body{
+    margin: 0px;
+    position: relative;
+    .krc-search-form{
+        max-width: inherit;
+    }
+
+    .krc-input-form-group{
+        width: 100%;
+        padding: 5px 10px;
+        position: relative;
+    }
+
+    .krc-input{
+        width: 100%;
+        border: none;
+        padding: 10px 0px;
+        font-size: 20px;
+        outline: none !important;
+    }
+
+    .krc-input-label{
+        margin: 0px;
+        color: #a1a1a1;
+    }
+
+    // Destination Widget
+    .krc-destination-widget{
+        width: 450px;
+        position: absolute;
+        background: $white;
+        box-shadow: $boxshadow;
+        border-radius: 10px;
+        visibility: hidden;
+        .destination-list{
+            padding: 10px !important;
+            cursor: pointer;
+            &:hover{
+                background: cadetblue;
+            }
+        }
+        
+    }
+    .krc-passclass-widget{
+        right: 90px;
+        width: 420px;
+        position: absolute;
+        background: $white;
+        box-shadow: $boxshadow;
+        border-radius: 10px;
+        visibility: hidden;
+        padding: 10px !important;
+    }
+    .visible{
+        visibility: visible;
+    }
+
+    #widget-ptk-passclass{
+        width: auto !important;
+        float: left;
+    }
+}
+
+.krc-search-button{
+    float: right;
+    padding: 10px 30px !important;
+    background: $primary !important;
+    color: $white !important;
+}
+
+// info bar
+.petik-infobar{
+    .card-title{
+        margin: 0px !important;
+        padding: 0px !important;
+        text-align: center;
+    }
+    margin-bottom: 10px;
+}
+
+
+
+
+
+
+

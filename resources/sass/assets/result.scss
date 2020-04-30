@@ -1,0 +1,166 @@
+.result-card{
+  margin-bottom: 10px !important;
+}
+.krc-result-list-header{
+    border: none !important;
+   background: #fff !important;
+}
+.krc-result-list-body{
+    padding-top: 0px !important;
+    border-top: 0px !important;
+}
+.krc-result-airline-img{
+    width: 85px !important;
+    height: 50px;
+    padding: 8px 15px;
+    border: 1px solid #e5e5e5; 
+    border-radius: 5px;
+    .krc-airline-img{
+        max-width: 100%;
+        max-height: 100%;
+        width: auto;
+        height: auto;
+        display: block;
+        margin: auto;
+    }
+}
+
+.krc-departure-img-thumbnail{
+    width: 85px !important;
+      height: 50px;
+      padding: 8px 15px;
+      border: 1px solid #e5e5e5;
+      border-radius: 5px;
+    .krc-departure-airline-img{
+          max-width: 100%;
+          max-height: 100%;
+          width: auto;
+          height: auto;
+          display: block;
+          margin: auto;
+    }
+}
+
+.demo-box {
+    background: #fff;
+    
+    margin: 0 auto;
+    box-shadow: -4px 23px 48px -13px rgba(0,0,0,0.75);
+    padding: 20px;
+    
+  }
+  
+  .flight-duration {
+    max-width: 430px;
+    margin: -14px auto 0 auto;
+    text-align: center;
+    font-size: 12px;
+    color: rgba(0,0,0,.4);
+    position: relative;
+    z-index: 4;
+  }
+  
+  .flight-info {
+    position: relative;
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+    max-width: 230px;
+    border-collapse: collapse;
+    
+    &:after {
+      content: '';
+      width: 100%;
+      height: 1px;
+      position: absolute;
+      top: 20px;
+      display: block;
+      background: #666;
+      z-index: 0;
+    }
+    
+    .segments {
+      display: table-row;
+  
+      > div {
+        display: table-cell;
+        text-align: center;
+        position: relative;
+      }
+      
+      .airport {
+        display: block;
+        font-size: 12px;
+        color: rgba(0,0,0,.4);
+      }
+      
+      .plane {
+        width: 36px;
+        height: 36px;
+        background-color: #fff;
+        position: absolute;
+        display: block;
+        left: 50%;
+        transform: translateX(-50%);
+        top: 0;
+      background-image: url('data:image/svg+xml;base64,PHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgdmlld0JveD0iMCAwIDUwIDI1Ij48cGF0aCBkPSJNNDYuMiwxMS4zYy0wLjktMS43LTMtMi4yLTQuNy0xLjNsLTEwLjcsNi4zbC0xNi02LjZsLTMuNSwyTDIyLDIxLjZMMTIuNiwyN0wyLjIsMjUuM0wwLDI2LjZsOC40LDYuN2wwLDBsMCwwbDAsMGwwLDBjNC44LTAuMyw1LjUtMC40LDgtMC42TDQ0LjksMTZDNDYuNSwxNS4xLDQ3LjEsMTMsNDYuMiwxMS4zeiIgc3R5bGU9ImZpbGw6IHJnYigxMTgsIDExOCwgMTE4KTsiLz48L3N2Zz4=');
+      background-size: 50% 100%;
+      background-position: center;
+      background-repeat: no-repeat;
+        z-index: 2;
+      }
+      
+      time {
+        font-weight: bold;
+        font-size: 17px;
+      }
+      
+      .segment {
+        width: 60px;
+        background: #fff;
+        position: relative;
+        z-index: 3;
+        padding: 0 8px;
+      }
+      
+      .departure {
+        padding: 0 8px 0 0;
+      }
+      .destination {
+        padding: 0 0 0 8px;
+      }
+    }
+  }
+  
+  @media screen and (max-width: 39.9375em) {
+    .adaptive {
+      display: none !important;
+    }
+  }
+  
+  @media screen and (max-width: 20em) {
+    
+    .flight-duration {
+      display: none !important;
+    }
+  }
+  
+  @media screen and (max-width: 15em) {
+    .flight-info:after {
+      display: none !important;
+    }
+  }
+  @media screen and (min-width: 16em) {
+    .flight-info:after {
+      display: block !important;
+    }
+  }
+  
+  p.info {
+    position: absolute;
+    bottom: 10px;
+    font-size: 11px;
+  }
+
+
+/* Choosed Ticket */

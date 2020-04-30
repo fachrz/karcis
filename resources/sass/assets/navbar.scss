@@ -1,0 +1,24 @@
+/* PeTik Navbar */
+.krc-navbar-wrapper{
+    margin-bottom: 10px !important;
+    background: $primary;
+    color: #fff;
+    .krc-register-button{
+        border: 1px solid $white;
+        border-radius: 5px;
+        background: $white;
+        color: $primary !important;
+        transition: 0.3s;
+    }
+    .krc-login-button:hover, .krc-register-button:hover{
+        background: $primary;
+        color: $white !important;
+
+    }
+    .krc-register-button{
+        margin-left: 10px;
+    }
+    .nav-link{
+        padding: 5px;
+    }
+}
