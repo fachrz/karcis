@@ -18,10 +18,6 @@ class pesawat_tickets_seeder extends Seeder
             'seat_class' => "economy",
             'price' => $price = 700000,
             'karcis_point' => (5 / 100) * $price,
-            'economy_quota' => 50,
-            'premeconomy_quota' => 50,
-            'bussiness_quota' => 50,
-            'first_quota' => 50,
         ]);
 
         DB::table('pesawat_tickets')->insert([
@@ -30,10 +26,6 @@ class pesawat_tickets_seeder extends Seeder
             'seat_class' => "economy",
             'price' => 700000,
             'karcis_point' => (5 / 100) * $price,
-            'economy_quota' => 50,
-            'premeconomy_quota' => 50,
-            'bussiness_quota' => 50,
-            'first_quota' => 50,
         ]);
     }
 }
