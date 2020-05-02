@@ -21,21 +21,26 @@ class AdminStationsController extends Controller
     }
     
     public function airportadd(Request $request){
+        
         $id_airport = strtoupper($request->input('id-airport'));
         $airport_name = ucfirst($request->input('airport-name'));
         $location = ucfirst($request->input('location'));
         $province = ucfirst($request->input('province'));
 
-        $airport = new pesawat_airports_model();
-        $airport->id_airport = $id_airport;
-        $airport->airport_name = $airport_name;
-        $airport->location = $location;
-        $airport->province = $province;
+        $airport = PesawatAirport::withTrashed()->updateOrCreate(
+            ['id_airport' => $id_airport],
+            [
+                'airport_name' => $airport_name,
+                'location' => $location,
+                'province' => $province
+            ]
+        )->restore();
+
         
-        if ($airport->save()) {
-            return redirect('/admin/pesawatairports')->with(['Success' => 'Data berhasil ditambahkan']);
+        if ($airport) {
+            return redirect()->back()->with(['Success' => 'Data berhasil ditambahkan']);
         }else{
-            return redirect('/admin/pesawatairports')->with(['Error' => 'Data gagal ditambahkan']);
+            return redirect()->back()->with(['Error' => 'Data gagal ditambahkan']);
         }
     }
 
