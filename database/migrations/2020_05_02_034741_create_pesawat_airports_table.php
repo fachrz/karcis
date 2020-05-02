@@ -18,6 +18,7 @@ class CreatePesawatAirportsTable extends Migration
             $table->string('airport_name', 50);
             $table->string('location', 50);
             $table->string('province', 50); 
+            $table->softDeletes();
         });
     }
 

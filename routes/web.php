@@ -51,13 +51,13 @@ Route::get('/keretaorder/payment/{order_id}', 'KeretaOrderController@payment');
 Route::get('/order/eticket/{order_id}', 'OrderController@e_ticket');
 
 /* Admin Route */
-
-Route::get('/admin/logout', 'AdminController@logout');
-Route::get('/admin', 'AdminController@login');
-Route::post('/adminauth', 'AdminController@Authentication');
+Route::get('/admin', 'AdminController@showLoginPage');
+Route::post('/admin/auth', 'AdminController@Authentication');
 Route::get('/admin/orders', 'AdminController@orders');
 Route::post('/admin/ordersconfirmation', 'AdminController@paymentConfirmation');
 Route::post('/admin/orders/validation', 'AdminController@paymentvalidation');
+Route::get('/admin/logout', 'AdminController@logout');
+
 
 Route::group(['middleware' => ['mymiddleware']], function () {
     Route::get('/admin/dashboard', 'AdminController@dashboard');
@@ -67,8 +67,6 @@ Route::group(['middleware' => ['mymiddleware']], function () {
     Route::get('/admin/vouchers', 'AdminController@showVoucherPage');
     Route::post('/admin/vouchers/add', 'AdminController@addVoucher');
     Route::get('/admin/vouchers/delete/{id_voucher}', 'AdminController@deleteVoucher');
-
-
 
     /* User Account */
     Route::get('/admin/usersaccount', 'AdminAccountController@showUserAccountPage');
@@ -85,11 +83,11 @@ Route::group(['middleware' => ['mymiddleware']], function () {
     Route::post('/admin/adminaccount/edit', 'AdminAccountController@editAdminAccount');
 
     /* Pesawat Airports */
-    Route::get('/admin/pesawatairports', 'AdminStationsController@pesawatairports');
+    Route::get('/admin/pesawatairports', 'AdminStationsController@showAirports');
     Route::post('/admin/pesawatairports/add', 'AdminStationsController@airportadd');
     Route::post('/admin/pesawatairports/datafetching', 'AdminStationsController@airportsdatafetching');
     Route::post('/admin/pesawatairports/edit', 'AdminStationsController@airportedit');
-    Route::get('/admin/pesawatairports/delete/{airport_id}', 'AdminStationsController@airportdelete');
+    Route::get('/admin/pesawatairport/delete/{id_airport}', 'AdminStationsController@airportDelete');
 
     /* Pesawat Aircrafts */
     Route::get('/admin/pesawataircrafts', 'AdminTransportsController@pesawataircrafts');

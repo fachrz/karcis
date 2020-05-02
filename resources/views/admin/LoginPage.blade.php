@@ -21,7 +21,7 @@
                             {{ $message }}
                         </div>
                     @endif
-                  <form class="user" action="/adminauth" method="post">
+                  <form class="user" action="/admin/auth" method="post">
                   @csrf
                     <div class="form-group">
                       <input type="text" name="username" class="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Enter Email Address...">

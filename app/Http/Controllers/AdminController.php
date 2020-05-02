@@ -29,7 +29,7 @@ use Illuminate\Support\Facades\Mail;
 
 class AdminController extends Controller
 {
-    public function login()
+    public function showLoginPage()
     {
         if (Session::get('admin_status') == true && Session::get('admin_level') == 0) {
             return redirect('admin/dashboard');

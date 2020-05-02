@@ -26,20 +26,25 @@
       <th scope="col">ID Airport</th>
       <th scope="col">Airport Name</th>
       <th scope="col">Location</th>
-      <th scope="col">Province</th>    </tr>
+      <th scope="col">Province</th>
+      <th scope="col">Options</th>    
+    </tr>
   </thead>
   <tbody> 
   
     @php
         $no = 1;
     @endphp
-    @foreach($airport as $ap)
+    @foreach($airports as $ap)
     <tr>
       <th scope="row">{{$no++}}</th>
       <td>{{$ap->id_airport}}</td>
       <td>{{$ap->airport_name}}</td>
       <td>{{$ap->location}}</td>
       <td>{{$ap->province}}</td>
+      <td>
+      <a href="{{ url('/admin/pesawatairport/delete/'.$ap->id_airport) }}"><button type="button" class="btn btn-danger">Delete</button></a>
+      </td>
     </tr>
     @endforeach
     

@@ -4,15 +4,20 @@ namespace App\Http\Controllers;
 
 use App\kereta_stations_model;
 use App\pesawat_airports_model;
+use App\PesawatAirport;
 use Illuminate\Http\Request;
 
 class AdminStationsController extends Controller
 {
-    public function pesawatairports(){
-        $airport = pesawat_airports_model::all();
-        return view('Admin.Pesawat.PesawatAirportsPage', [
-            'airport' => $airport,
-        ]);
+    /**
+     * Pesawat
+     * 
+     */
+    public function showAirports(){
+
+        $airports = PesawatAirport::all();
+        
+        return view('Admin.Pesawat.PesawatAirportsPage', compact('airports'));
     }
     
     public function airportadd(Request $request){
@@ -57,12 +62,14 @@ class AdminStationsController extends Controller
         }
     }
 
-    public function airportdelete($airport_id){
-        $airport = pesawat_airports_model::where('id_airport', $airport_id);
+    public function airportDelete($id_airport){
+        $airport = PesawatAirport::find($id_airport);
+        $airport->delete();
+        
         if ($airport->delete()) {
-            return redirect('/admin/pesawatairports')->with(['Success' => 'Data Berhasil di hapus']);
-        }else{
-            return redirect('/admin/pesawatairports')->with(['Error' => 'Data gagal di hapus']);
+            return redirect()->back()->with(['Error' => 'Data berhasil di hapus']);
+        }else {
+            return redirect()->back()->with(['Error' => 'Data gagal di hapus']);
         }
     }
 
