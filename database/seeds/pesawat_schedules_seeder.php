@@ -18,6 +18,10 @@ class pesawat_schedules_seeder extends Seeder
             'aircraft_registry' => "SDFHLK",
             'flight_number' => "GA-350",
             'departure_date' => Carbon::parse('2020-05-2 19:18:44'),
+            'premeconomy_quota' => 50,
+            'bussiness_quota' => 50,
+            'first_quota' => 50,
+            'economy_quota' => 50,
         ]); 
 
         DB::table('pesawat_schedules')->insert([
@@ -25,6 +29,10 @@ class pesawat_schedules_seeder extends Seeder
             'aircraft_registry' => "SODIF",
             'flight_number' => "JT-250",
             'departure_date' => Carbon::parse('2020-05-2 19:18:44'),
+            'premeconomy_quota' => 50,
+            'bussiness_quota' => 50,
+            'first_quota' => 50,
+            'economy_quota' => 50,
         ]);
     }
 }
