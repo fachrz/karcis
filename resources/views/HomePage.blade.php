@@ -1,6 +1,6 @@
 @extends('layouts.AuthTemplate')
 
-@section('pageTitle', 'Karcis - Beli Tiket Online')
+@section('pageTitle', 'Karcis - Pesan Tiket Pesawat Online')
 
 @section('content')
 <!-- Start PeTik Order Section -->
