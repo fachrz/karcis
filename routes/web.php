@@ -25,7 +25,7 @@ Route::get('/logout', 'AuthController@logout');
 Route::post('/login/tpa', 'AuthController@thirdPartyAuthentication');
 
 /* Home Route */
-Route::get('/', 'HomeController@index');
+Route::get('/', 'PesawatController@showHomePage');
 //history Order
 Route::get('/historyorder', 'HomeController@historyOrder');
 Route::get('/historyorder/delete/{id_order}', 'HomeController@deleteHistoryOrder');
