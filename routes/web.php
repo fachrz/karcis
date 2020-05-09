@@ -82,21 +82,26 @@ Route::group(['middleware' => ['mymiddleware']], function () {
     Route::post('/admin/adminaccount/getedit', 'AdminAccountController@getAdminData');
     Route::post('/admin/adminaccount/edit', 'AdminAccountController@editAdminAccount');
 
-    /* Pesawat Airports */
-    Route::get('/admin/pesawatairports', 'AdminStationsController@showAirports');
-    Route::post('/admin/pesawatairports/add', 'AdminStationsController@airportadd');
-    Route::post('/admin/pesawatairports/datafetching', 'AdminStationsController@airportsdatafetching');
-    Route::post('/admin/pesawatairports/edit', 'AdminStationsController@airportedit');
-    Route::get('/admin/pesawatairport/delete/{id_airport}', 'AdminStationsController@airportDelete');
+    /* Admin Pesawat Airports */
+    Route::get('/admin/pesawatairports', 'AdminStationController@showAirports');
+    Route::post('/admin/pesawatairports/add', 'AdminStationController@storeAirport');
+    Route::get('/admin/pesawatairports/getairport', 'AdminStationController@getAirport');
+    Route::post('/admin/pesawatairports/edit', 'AdminStationController@editAirport');
+    Route::get('/admin/pesawatairport/delete/{id_airport}', 'AdminStationController@airportDelete');
 
-    /* Pesawat Aircrafts */
+    /* Admin Pesawat Airlines */
+    Route::get('/admin/pesawatairlines', 'AdminProviderController@showAirline');
+    Route::post('/admin/pesawatairlines/add', 'AdminProviderController@storeAirline');
+    Route::get('/admin/pesawatairlines/delete/{id_airline}', 'AdminProviderController@deleteAirline');
+
+    /* Admin Pesawat Aircrafts */
     Route::get('/admin/pesawataircrafts', 'AdminTransportsController@pesawataircrafts');
     Route::post('/admin/pesawataircrafts/add', 'AdminTransportsController@aircraftsadd');
     Route::post('/admin/pesawataircrafts/datafetching', 'AdminTransportsController@aircraftsdatafetching');
     Route::post('/admin/pesawataircrafts/edit', 'AdminTransportsController@aircraftsedit');
     Route::get('/admin/pesawataircrafts/delete/{aircrafts_registry}', 'AdminTransportsController@aircraftsdelete');
 
-    /* Pesawat Schedules */
+    /* Admin Pesawat Schedules */
     Route::get('/admin/pesawatschedules', 'Admin\Pesawat\ScheduleController@schedules');
     Route::post('/admin/pesawat/schedules', 'Admin\Pesawat\ScheduleController@store');
     Route::post('/admin/pesawatschedules/requiredfetching', 'AdminSchedulesController@requiredfetching');
@@ -104,10 +109,7 @@ Route::group(['middleware' => ['mymiddleware']], function () {
     Route::post('/admin/pesawatschedules/edit', 'AdminSchedulesController@schedulesedit');
     Route::get('/admin/pesawatschedules/delete/{id_schedule}', 'AdminSchedulesController@schedulesdelete');
 
-    /* Pesawat airlines */
-    Route::get('/admin/pesawatairlines', 'AdminProvidersController@pesawatairlines');
-    Route::post('/admin/pesawatairlines/add', 'AdminProvidersController@airlinesadd');
-    Route::get('/admin/pesawatairlines/delete/{id_airlines}', 'AdminProvidersController@airlinesdelete');
+    
 
     /* Pesawat flight */
     Route::get('/admin/pesawatflights', 'AdminFlightsController@pesawatFlights');
