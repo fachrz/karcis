@@ -76,3 +76,17 @@ $('#keretaticketsinsert').click(function () {
     });
 })
 
+/* Get Airport data */
+$('.airportUpdate').click(function () {
+    var idAirport = $(this).attr('data-href')
+    axios.get('/admin/pesawatairports/getairport', {
+        params: {
+            id_airport: idAirport
+        }
+    }).then((response) => {
+        $('#id-airport').val(response.data.id_airport);
+        $('#airport-name').val(response.data.airport_name);
+        $('#location').val(response.data.location);
+        $('#province').val(response.data.province);
+    });
+})
