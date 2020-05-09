@@ -3,25 +3,30 @@
 namespace App\Http\Controllers;
 
 use App\kereta_stations_model;
-use App\pesawat_airports_model;
 use App\PesawatAirport;
 use Illuminate\Http\Request;
 
-class AdminStationsController extends Controller
+class AdminStationController extends Controller
 {
     /**
-     * Pesawat
+     * Show Pesawat Airports data
      * 
+     * @return View PesawatAirportsPage
      */
-    public function showAirports(){
-
+    public function showAirports()
+    {
         $airports = PesawatAirport::all();
         
         return view('Admin.Pesawat.PesawatAirportsPage', compact('airports'));
     }
     
-    public function airportadd(Request $request){
-        
+    /**
+     * Storing Airport data
+     * 
+     * @param Request $request
+     */
+    public function storeAirport(Request $request)
+    {
         $id_airport = strtoupper($request->input('id-airport'));
         $airport_name = ucfirst($request->input('airport-name'));
         $location = ucfirst($request->input('location'));
@@ -44,32 +49,15 @@ class AdminStationsController extends Controller
         }
     }
 
-    public function airportedit(Request $request){
-        $id_airport = strtoupper($request->input('id-airport'));
-        $airport_name = ucfirst($request->input('airport-name'));
-        $location = ucfirst($request->input('location'));
-        $province = ucfirst($request->input('province'));
-
-        try {
-            $airport = pesawat_airports_model::where('id_airport', $id_airport);
-            $airport->update([
-
-                'airport_name' => $airport_name,
-                'location' => $location,
-                'province' => $province,
-
-            ]);
-
-            return redirect('/admin/pesawatairports')->with(['Success' => 'Update Berhasil']);
-
-        } catch (\Exception $th) {
-            return redirect('/admin/pesawatairports')->with(['Error' => 'Update Gagal']);
-        }
-    }
-
-    public function airportDelete($id_airport){
+    /**
+     * Delete Airport data
+     * 
+     * @param String $id_airport
+     * @return RedirectResponse
+     */
+    public function airportDelete($id_airport)
+    {
         $airport = PesawatAirport::find($id_airport);
-        $airport->delete();
         
         if ($airport->delete()) {
             return redirect()->back()->with(['Error' => 'Data berhasil di hapus']);
@@ -78,14 +66,50 @@ class AdminStationsController extends Controller
         }
     }
 
-    public function airportsdatafetching(Request $request){
-        $id_airport = $request->id_airports;
-        $airport = pesawat_airports_model::where('id_airport', $id_airport)->first();
+    /**
+     * Edit Airport data
+     * 
+     * @param Request $request
+     * @return RedirectResponse
+     */
+    public function editAirport(Request $request)
+    {
+        $id_airport = strtoupper($request->input('id-airport'));
+        $airport_name = ucfirst($request->input('airport-name'));
+        $location = ucfirst($request->input('location'));
+        $province = ucfirst($request->input('province'));
+
+        try {
+            $airport = PesawatAirport::where('id_airport', $id_airport);
+            $airport->update([
+                'airport_name' => $airport_name,
+                'location' => $location,
+                'province' => $province,
+            ]);
+
+            return redirect()->back()->with(['Success' => 'Update Berhasil']);
+        } catch (\Exception $th) {
+            return redirect()->back()->with(['Error' => 'Update Gagal']);
+        }
+    }
+    
+    /**
+     * Get Airport data and return in JSON
+     * 
+     * @param Request $request
+     * @return Json airport data
+     */
+    public function getAirport(Request $request)
+    {
+        $airport = PesawatAirport::where('id_airport', $request->id_airport)->first();
+        
         return response($airport);
     }
 
     /**
-     * Kereta Controller
+     * Kereta
+     * 
+     * @return View KeretaStationsPage
      */
     public function keretastations(){
         $stations = kereta_stations_model::all();
