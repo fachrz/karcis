@@ -3,7 +3,7 @@
 @section('pageTitle', 'Pesawat Airports')
 @section('top-right-corner-button')
   <!-- Button trigger modal -->
-<button class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" data-toggle="modal" data-target="#airportsinsertmodal"><i class="fas fa-plus fa-sm text-white-50"></i> Insert Data</button>
+<button class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" data-toggle="modal" data-target="#airportInsertModal"><i class="fas fa-plus fa-sm text-white-50"></i> Insert Data</button>
 @endsection
 @section('content')
 @if ($message = Session::get('Success'))
@@ -43,8 +43,9 @@
       <td>{{$ap->location}}</td>
       <td>{{$ap->province}}</td>
       <td>
-      <a href="{{ url('/admin/pesawatairport/delete/'.$ap->id_airport) }}"><button type="button" class="btn btn-danger">Delete</button></a>
-      </td>
+      <button type="button" class="btn btn-warning airportUpdate" data-toggle="modal" data-target="#airportUpdateModal" data-href="{{ $ap->id_airport }}"><i class="fas fa-edit"></i></button>
+      <a href="{{ url('/admin/pesawatairport/delete/'.$ap->id_airport) }}"><button type="button" class="btn btn-danger" ><i class="fas fa-trash-alt"></i></button>
+      </a>
     </tr>
     @endforeach
     
@@ -52,7 +53,7 @@
 </table>
 
 <!-- Insert Modal -->
-<div class="modal fade" id="airportsinsertmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="airportInsertModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -105,11 +106,11 @@
 </div>
 
 <!-- Update Modal -->
-<div class="modal fade" id="airportsupdatemodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="airportUpdateModal" tabindex="-1" role="dialog" aria-labelledby="updateModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Update Data</h5>
+        <h5 class="modal-title" id="updateModalLabel">Update Data</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
