@@ -21,7 +21,7 @@ class AdminStationController extends Controller
     }
     
     /**
-     * Storing Airport data
+     * Store Airport data
      * 
      * @param Request $request
      */
