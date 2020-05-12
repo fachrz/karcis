@@ -87,12 +87,14 @@ Route::group(['middleware' => ['mymiddleware']], function () {
     Route::post('/admin/pesawatairports/add', 'AdminStationController@storeAirport');
     Route::get('/admin/pesawatairports/getairport', 'AdminStationController@getAirport');
     Route::post('/admin/pesawatairports/edit', 'AdminStationController@editAirport');
-    Route::get('/admin/pesawatairport/delete/{id_airport}', 'AdminStationController@airportDelete');
+    Route::get('/admin/pesawatairports/delete/{id_airport}', 'AdminStationController@airportDelete');
 
     /* Admin Pesawat Airlines */
-    Route::get('/admin/pesawatairlines', 'AdminProviderController@showAirline');
+    Route::get('/admin/pesawatairlines', 'AdminProviderController@showAirlines');
     Route::post('/admin/pesawatairlines/add', 'AdminProviderController@storeAirline');
-    Route::get('/admin/pesawatairlines/delete/{id_airline}', 'AdminProviderController@deleteAirline');
+    Route::get('/admin/pesawatairline/delete/{id_airline}', 'AdminProviderController@deleteAirline');
+    Route::get('/admin/pesawatairline/restore/{iata_code}', 'AdminProviderController@restoreAirline');
+
 
     /* Admin Pesawat Aircrafts */
     Route::get('/admin/pesawataircrafts', 'AdminTransportsController@pesawataircrafts');
