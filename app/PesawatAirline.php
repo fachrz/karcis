@@ -3,9 +3,12 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class PesawatAirline extends Model
 {
+    use SoftDeletes;
+    
     protected $table = 'pesawat_airlines';
     protected $primaryKey = 'airline_id';
     public $incrementing = true;
