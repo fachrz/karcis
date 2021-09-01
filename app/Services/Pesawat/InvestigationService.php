@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Service\Pesawat;
+namespace App\Services\Pesawat;
 
 use App\kereta_temp_orders_model;
 use App\kereta_temp_passengers_model;
