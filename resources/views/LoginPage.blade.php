@@ -8,7 +8,7 @@
 
 @section('content')
 
-<div class="login-containerss">
+<div class="login-container">
 <div class="login-box">
     <div>
       <p class="login-title text-center">Login to Karcis</p>
@@ -19,7 +19,7 @@
           <strong>{{ $message }}</strong>
       </div>
     @endif
-    <div class="login-third-party-login">
+    {{-- <div class="login-third-party-login">
       <p class="login-button-info-text login-info-text text-center">EASILY USING</p>
       <div class="login-button-container container-fluid">
         <div class="row">
@@ -37,8 +37,8 @@
         </div>
         </div>
       </div>
-    </div>
-    <p class="login-info-text text-center">- OR USING EMAIL -</p>
+    </div> --}}
+    {{-- <p class="login-info-text text-center">- OR USING EMAIL -</p> --}}
     <form action="{{ url('/auth') }}" method="post" class="login-login-form">
       @csrf
       <fieldset class="login-input-container">
@@ -54,7 +54,7 @@
       </fieldset>
     </form>
     <div class="login-link-container">
-      <a class="login-link" href="#">Recover password</a>
+      <a class="login-link" href="#">Forgot password?</a>
       <div class="login-right-links">
         <a class="login-create-account-link login-link" href="{{url('/register')}}">Create Account</a>
       </div>

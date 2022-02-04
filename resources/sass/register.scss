@@ -1,17 +1,14 @@
 .register-container{
-    margin: auto;
     text-align: center;
-    margin-top: 30px;
 }
 .register-box {
-    position: absolute;
-    top: 50%;
-    left: 50%; 
-    @include transform(translate(-50%, -50%) scale(0.9));
+    margin: 40px 0px 40px 0px;
+    text-align: left !important;
     background-color: #fff;
     box-shadow: 0 2px 15px rgba(0,0,0,.1);
     padding: 10px 30px;
-    width: 600px;
+    width: 500px;
+    border-radius: 10px;
 }
 
 .header-sprite {
@@ -27,7 +24,7 @@
 }
 
 .register-title {
-    font-size: 32px;
+    font-size: 22px;
     margin-top: 15px;
     color: #535766
 }
@@ -105,13 +102,12 @@
 
 .register-input-container {
     margin: 20px;
-
     border-radius: 5px;
     padding: 0
 }
 
 .register-input-item {
-    position: relative
+    height: 50px;
 }
 
 .register-user-input {
@@ -184,7 +180,7 @@
 }
 
 .register-register-button {
-    background-color: #6a2c91;
+    background-color: $primary;
     color: #fff;
     font-size: 13px;
     font-weight: 500;
@@ -195,11 +191,11 @@
     border: 0;
     text-transform: uppercase;
     border-radius: 3px;
-    font-family: Whitney
+    font-family: Roboto Condensed
 }
 
 .register-register-button:hover {
-   background: #A543E2;
+   background: $primaryHover;
 }
 
 .register-register-button:focus {

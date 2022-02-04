@@ -8,7 +8,7 @@
 
 @section('content')
 
-<div class="register-containerss">
+<div class="register-container">
 <div class="register-box">
     <div>
       <p class="register-title text-center">Register to Karcis</p>
@@ -28,7 +28,7 @@
       </div>
     @endif
 
-    <div class="register-third-party-register">
+    {{-- <div class="register-third-party-register">
       <p class="register-button-info-text register-info-text text-center">EASILY USING</p>
       <div class="register-button-container container-fluid">
         <div class="row">
@@ -46,48 +46,36 @@
         </div>
         </div>
       </div>
-    </div>
-    <p class="register-info-text text-center">- OR USING EMAIL -</p>
+    </div> --}}
+    {{-- <p class="register-info-text text-center">- OR USING EMAIL -</p> --}}
     <form action="{{ url('/registerrequest') }}" method="post" class="register-register-form">
       @csrf
-      <fieldset class="register-input-container">
-        <div class="row">
-            <div class="col">
-                <div class="form-group">
-                    <label for="email">Email address</label>
-                    <input type="email" name="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Masukan Email" required>
-                </div>
-            </div>
-            <div class="col">
-                <div class="form-group">
-                    <label for="password">Password</label>
-                    <input type="password" name="password" class="form-control" id="password" placeholder="Masukan Nama" required>
-                </div>
-            </div>
+      <div class="register-input-container">
+        <div class="form-group">
+          <label for="email">Email address</label>
+          <input type="email" name="email" class="form-control register-input-item" id="email" aria-describedby="emailHelp" placeholder="Masukan Email" required>
         </div>
-        <div class="row">
-            <div class="col">
-                <div class="form-group">
-                    <label for="first-name">First Name</label>
-                    <input type="text" name="first-name" class="form-control" id="first-name" aria-describedby="emailHelp" placeholder="Masukan Nama Depan" required>
-                </div>
-            </div>
-            <div class="col">
-                <div class="form-group">
-                    <label for="last-name">Last Name</label>
-                    <input type="text" name="last-name" class="form-control" id="last-name" placeholder="Masukan Nama Belakang" required>
-                </div>
-            </div>
+
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" name="password" class="form-control register-input-item" id="password" placeholder="Masukan Nama" required>
         </div>
-        <div class="row">
-            <div class="col-6">
-                <div class="form-group">
-                <label for="no-telp">No Telepon</label>
-                <input type="text" name="telp" class="form-control" id="no-telp" placeholder="Masukan Nomor Telepon" required>
-                </div>
-            </div>
+
+        <div class="form-group">
+          <label for="first-name">First Name</label>
+          <input type="text" name="first-name" class="form-control register-input-item" id="first-name" aria-describedby="emailHelp" placeholder="Masukan Nama Depan" required>
         </div>
-      </fieldset>
+
+        <div class="form-group">
+          <label for="last-name">Last Name</label>
+          <input type="text" name="last-name" class="form-control register-input-item" id="last-name" placeholder="Masukan Nama Belakang" required>
+        </div>
+
+        <div class="form-group">
+          <label for="no-telp">No Telepon</label>
+          <input type="text" name="telp" class="form-control register-input-item" id="no-telp" placeholder="Masukan Nomor Telepon" required>
+        </div>
+      </div>
       <fieldset class="register-register-button-container">
         <input type="submit" class="register-register-button" value="Register">
       </fieldset>
