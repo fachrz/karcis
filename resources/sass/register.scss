@@ -203,7 +203,7 @@
 .register-register-button:focus {
     outline: 0;
     box-shadow: inset 1px 2px 8px rgba(0,0,0,.2);
-    background-color: #ff3f6c
+    background-color: $primaryHover
 }
 
 .register-link-container {

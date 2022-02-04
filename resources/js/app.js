@@ -8,6 +8,10 @@ require('./bootstrap');
 require('startbootstrap-sb-admin-2/js/sb-admin-2');
 require('jquery-ui/ui/widgets/datepicker');
 
+//form validation
+var validate = require("validate.js");
+
+
 /*Third Party Login*/
 let hello = require('hellojs/dist/hello.all.js');
 
@@ -228,6 +232,53 @@ function tpaauthentication(account_type) {
  * Run Function Below
  */
 getKarcisPoint()
+
+
+// Register Validation
+document.getElementById("register-form").addEventListener("submit", function(e){
+    var email, password, firstName, lastName, noTelp;
+
+    email = document.getElementById('email').value;
+    password = document.getElementById('password').value;
+    firstName = document.getElementById('first-name').value;
+    lastName = document.getElementById('last-name').value;
+    noTelp = document.getElementById('no-telp').value;
+
+    var validation = validate({
+        email: email,
+        password: password,
+        first_name: firstName,
+        last_name: lastName,
+        no_telepon: noTelp
+    }, {
+        email: {
+            presence: {allowEmpty: false, message: "Tidak boleh kosong"},
+            email: {message: "tidak valid"}
+        },
+        password: {
+            presence: {allowEmpty: false, message: "Tidak boleh kosong"}
+        },
+        first_name: {
+            presence: {allowEmpty: false, message: "Tidak boleh kosong"}
+        },
+        last_name: {
+            presence: true
+        },
+        no_telepon: {
+            presence: {allowEmpty: false, message: "Tidak boleh kosong"}
+        }
+    });
+
+    if (validation) {
+        document.getElementById("email-error").innerHTML = validation.email !== undefined ? validation.email[0]: "";
+        document.getElementById("password-error").innerHTML = validation.password !== undefined ? validation.password[0]: "";
+        document.getElementById("firstname-error").innerHTML = validation.first_name !== undefined ? validation.first_name[0]: "";
+        document.getElementById("lastname-error").innerHTML = validation.last_name !== undefined ? validation.last_name[0]: "";
+        document.getElementById("notelp-error").innerHTML = validation.no_telepon !== undefined ? validation.no_telepon[0]: "";
+
+        e.preventDefault();
+    }
+})
 
 
 
