@@ -54,36 +54,42 @@
         <div class="form-group">
           <label for="email">Email</label>
           <input type="email" name="email" class="form-control register-input-item" id="email" placeholder="Masukan Email" >
-          <span style="color: red" id="email-error"></span>
-        </div>
-
-        <div class="form-group">
-          <label for="password">Password</label>
-          <input type="password" name="password" class="form-control register-input-item" id="password" placeholder="Masukan Nama" >
-          <span style="color: red" id="password-error"></span>
+          <small class="register-input-error" id="email-error"></small>
         </div>
 
         <div class="form-group">
           <label for="first-name">First Name</label>
           <input type="text" name="first-name" class="form-control register-input-item" id="first-name" aria-describedby="emailHelp" placeholder="Masukan Nama Depan" >
-          <span style="color: red" id="firstname-error"></span>
+          <small class="register-input-error" id="firstname-error"></small>
         </div>
 
         <div class="form-group">
           <label for="last-name">Last Name</label>
           <input type="text" name="last-name" class="form-control register-input-item" id="last-name" placeholder="Masukan Nama Belakang" >
-          <span style="color: red" id="lastname-error"></span>
+          <small class="register-input-error" id="lastname-error"></small>
         </div>
 
         <div class="form-group">
           <label for="no-telp">No Telepon</label>
           <input type="text" name="telp" class="form-control register-input-item" id="no-telp" placeholder="Masukan Nomor Telepon" >
-          <span style="color: red" id="notelp-error"></span>
+          <small class="register-input-error" id="notelp-error"></small>
+        </div>
+
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" name="password" class="form-control register-input-item" id="password" placeholder="Masukan Password" >
+          <small class="register-input-error" id="password-error"></small>
+        </div>
+
+        <div class="form-group">
+          <label for="confirm-password">Confirm Password</label>
+          <input type="password" name="confirm-password" class="form-control register-input-item" id="confirm-password" placeholder="Konfirmasi Password" >
+          <small class="register-input-error" id="confirmpassword-error"></small>
         </div>
       </div>
-      <fieldset class="register-register-button-container">
+      <div class="register-register-button-container">
         <input type="submit" class="register-register-button" id="submit-register" value="Register">
-      </fieldset>
+      </div>
     </form>
     <p style="text-align: center;">Already have an account? <a href="{{ url('/login') }}">Back to Login</a> </p>
   </div>

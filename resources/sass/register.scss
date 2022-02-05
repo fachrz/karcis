@@ -13,9 +13,10 @@
     border-radius: 10px;
 }
 
-.header-sprite {
-    background: url(https://cdn.myntassets.com/myx/images/header@2x-new16.a409d46af2e211afcaa82c1359787a90408024be.png) no-repeat 0 0;
-    background-size: 336px 48px
+.register-title {
+    font-size: 22px;
+    margin-top: 15px;
+    color: #535766
 }
 
 .register-logo {
@@ -23,12 +24,6 @@
     margin-top: 30px;
     width: 50px;
     height: 38px
-}
-
-.register-title {
-    font-size: 22px;
-    margin-top: 15px;
-    color: #535766
 }
 
 .register-third-party-register {
@@ -110,6 +105,10 @@
 
 .register-input-item {
     height: 50px;
+}
+
+.register-input-error{
+    color: red;
 }
 
 .register-user-input {

@@ -234,44 +234,59 @@ function tpaauthentication(account_type) {
 getKarcisPoint()
 
 
-// Register Validation
+/**
+ * Register Form
+ * 
+ */
 document.getElementById("register-form").addEventListener("submit", function(e){
-    var email, password, firstName, lastName, noTelp;
+    var email, password, firstName, lastName, noTelp, confirmPassword;
 
     email = document.getElementById('email').value;
     password = document.getElementById('password').value;
     firstName = document.getElementById('first-name').value;
     lastName = document.getElementById('last-name').value;
     noTelp = document.getElementById('no-telp').value;
+    confirmPassword = document.getElementById('confirm-password').value;
 
     var validation = validate({
         email: email,
         password: password,
+        confirm_password: confirmPassword,
         first_name: firstName,
         last_name: lastName,
         no_telepon: noTelp
     }, {
         email: {
-            presence: {allowEmpty: false, message: "Tidak boleh kosong"},
+            presence: {allowEmpty: false, message: "Email tidak boleh kosong"},
             email: {message: "tidak valid"}
         },
         password: {
-            presence: {allowEmpty: false, message: "Tidak boleh kosong"}
+            presence: {allowEmpty: false, message: "Password tidak boleh kosong"}
+        },
+        confirm_password: {
+            presence: {allowEmpty: false, message: "Konfirmasi Password tidak boleh kosong"},
+            equality: {
+                attribute: "password",
+                message: "Password tidak sama"
+            }
         },
         first_name: {
-            presence: {allowEmpty: false, message: "Tidak boleh kosong"}
+            presence: {allowEmpty: false, message: "Nama Depan tidak boleh kosong"}
         },
         last_name: {
             presence: true
         },
         no_telepon: {
-            presence: {allowEmpty: false, message: "Tidak boleh kosong"}
+            presence: {allowEmpty: false, message: "No Telepon tidak boleh kosong"}
         }
+    }, {
+        fullMessages: false
     });
 
     if (validation) {
         document.getElementById("email-error").innerHTML = validation.email !== undefined ? validation.email[0]: "";
         document.getElementById("password-error").innerHTML = validation.password !== undefined ? validation.password[0]: "";
+        document.getElementById("confirmpassword-error").innerHTML = validation.confirm_password !== undefined ? validation.confirm_password[0]: "";
         document.getElementById("firstname-error").innerHTML = validation.first_name !== undefined ? validation.first_name[0]: "";
         document.getElementById("lastname-error").innerHTML = validation.last_name !== undefined ? validation.last_name[0]: "";
         document.getElementById("notelp-error").innerHTML = validation.no_telepon !== undefined ? validation.no_telepon[0]: "";
@@ -279,6 +294,65 @@ document.getElementById("register-form").addEventListener("submit", function(e){
         e.preventDefault();
     }
 })
+
+//no-telp numeric only
+document.getElementById("no-telp").addEventListener('keypress', (e) => {
+    if (isNaN(e.key)) {
+        e.preventDefault();
+    }
+});
+
+/**
+ * Password Form Validation
+ * 
+ */
+document.getElementById("password").addEventListener('keyup', (e) => {
+    var passwordVal = document.getElementById("password").value;
+    var confirmPassVal = document.getElementById("confirm-password").value;
+    var confirmPassError = document.getElementById("confirmpassword-error");
+    var passMatchValidation = passwordMatchValidation(passwordVal, confirmPassVal);
+
+    if (passMatchValidation) {
+        confirmPassError.innerHTML = passMatchValidation.confirm_password !== undefined ? passMatchValidation.confirm_password[0]: "";
+    }else{
+        confirmPassError.innerHTML = "";
+    }
+});
+
+//confirm password
+document.getElementById("confirm-password").addEventListener('keyup', (e) => {
+    var passwordVal = document.getElementById("password").value;
+    var confirmPassVal = document.getElementById("confirm-password").value;
+    var confirmPassError = document.getElementById("confirmpassword-error");
+    var passMatchValidation = passwordMatchValidation(passwordVal, confirmPassVal)
+
+    if (passMatchValidation) {
+        confirmPassError.innerHTML = passMatchValidation.confirm_password !== undefined ? passMatchValidation.confirm_password[0]: "";
+    }else{
+        confirmPassError.innerHTML = "";
+    }
+});
+
+function passwordMatchValidation(password, confirmPassword){
+    var validation = validate({
+        password: password,
+        confirm_password: confirmPassword
+    }, {
+        confirm_password: {
+            equality: {
+                attribute: "password",
+                message: "Password tidak sama"
+            }
+        },
+    }, {
+        fullMessages: false
+    });
+
+    return validation;
+}
+
+
+
 
 
 
