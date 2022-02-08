@@ -2,10 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Lcobucci\JWT\Builder;
 use Illuminate\Http\Request;
-use App\UsersModel;
-use App\kc_users_model;
+use App\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 class AuthController extends Controller
@@ -36,59 +34,52 @@ class AuthController extends Controller
     }
 
     /**
-     * Register Request
+     * Register
      * 
-     * method ini bertangung jawab dalam menerima request untuk registrasi.
-     * method ini tidak melakukan registrasi.
+     * Daftar Account
      */
-    public function registerRequest(Request $request)
+    public function register()
     {
+        #validation
+        $validatedData = validator(request()->all(), [
+            'email' => 'required|email',
+            'password' => 'required',
+            'first_name' => 'required',
+            'no_telp' => 'required|numeric',
+            'confirm_password' => 'required|same:password'
+        ], [
+            'email.required' => 'Email tidak boleh kosong',
+            'email.email' => 'Email tidak valid',
+            'password.required' => 'Password tidak boleh kosong', 
+            'first_name.required' => 'Nama depan tidak boleh kosong',
+            'no_telp.required' => 'Nomor Telepon tidak boleh kosong',
+            'no_telp.numeric' => 'Nomor Telepon tidak valid',
+            'confirm_password.required' => 'Konfirmasi Password tidak boleh kosong',
+            'confirm_password.same' => 'Password tidak sama'
+        ]);
 
-        $account = [
-            'email' => $request->input('email'),
-            'password' => Hash::make($request->input('password')),
-            'first_name' => $request->input('first-name'),
-            'last_name' => $request->input('last-name'),
-            'telp' => $request->input('telp'),
-            'account_type' => 'email',
-        ];
+        $validatedData->validate();
+        
+        if (is_null($this->accountCheck(request()->input('email')))) {
+            try {
+                User::create([
+                    'email' => request()->input('email'),
+                    'password' => Hash::make(request()->input('password')), 
+                    'first_name' => request()->input('first_name'), 
+                    'last_name' => request()->input('last_name'), 
+                    'telp' => request()->input('no_telp'), 
+                    'karcis_point' => 0, 
+                    'account_type' => 'email'
+                ]);
 
-        $accountCheck = $this->accountCheck($account['email']);
-
-        if ($accountCheck == null) {
-            $register = $this->accountRegister($account);
-
-            if ($register['msg_code'] == '0sc8v14') {
-                 return redirect('/register')->with(['Success' => 'Pendaftaran Berhasil Silahkan Login!']);
-            }else{
-                 return redirect('/register')->with(['Error' => 'Pendaftaran Berhasil Silahkan Login!']);
+                return redirect('/register')->with(['Success' => 'Registrasi Akun berhasil']);
+            } catch (\Throwable $th) {
+                // return $th;
+                return redirect('/register')->with('Error', 'Registrasi Akun gagal, terjadi masalah dengan server!');
             }
         }else{
-            return redirect('/register')->with(['Error' => 'Maaf Email telah terdaftar']);
-        }
-    }
-
-    /**
-     * Register Account
-     * 
-     * method ini bertangung jawab untuk melakukan registrasi akun
-     */
-    public function accountRegister(array $account)
-    {
-
-        $user = kc_users_model::create($account);
-
-        if ($user) {
-            return [
-                'message' => 'Account_Registered_Success',
-                'msg_code' => '0sc8v14'
-            ];
-        }else{
-            return [
-                'message' => 'Account_Registered_Failed',
-                'msg_code' => '0er8v14'
-            ];
-        }
+            return redirect('/register')->with('Error', 'Email telah terdaftar')->withInput();  
+        }    
     }
 
     /**
@@ -98,7 +89,7 @@ class AuthController extends Controller
      */
     public function accountCheck($email){
 
-        $users = kc_users_model::select('email', 'account_type', 'password')->where('email', $email)->first();
+        $users = User::select('email', 'account_type', 'password')->where('email', $email)->first();
 
         return $users;
     }
@@ -185,7 +176,7 @@ class AuthController extends Controller
     }
 
     public function createUserSession($email){
-        $usersmodel = kc_users_model::where('email', $email)->first();
+        $usersmodel = User::where('email', $email)->first();
 
         Session::put('email', $usersmodel->email);
         Session::put('first_name', $usersmodel->first_name);
@@ -199,7 +190,7 @@ class AuthController extends Controller
     }
 
     public function thirdPartyRegister(Request $request){
-        $users = new kc_users_model();
+        $users = new User();
         $users->email = $request->email;
         $users->username = $request->username;
         $users->account_type = $request->thumbnail;
