@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use Exception;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 class AuthController extends Controller
@@ -60,7 +61,7 @@ class AuthController extends Controller
 
         $validatedData->validate();
         
-        if (is_null($this->accountCheck(request()->input('email')))) {
+        if (!$this->isUserExists(request()->input('email'))) {
             try {
                 User::create([
                     'email' => request()->input('email'),
@@ -75,21 +76,24 @@ class AuthController extends Controller
                 return redirect('/register')->with(['Success' => 'Registrasi Akun berhasil']);
             } catch (\Throwable $th) {
                 // return $th;
-                return redirect('/register')->with('Error', 'Registrasi Akun gagal, terjadi masalah dengan server!');
+                return redirect('/register')->with('Error', 'Registrasi Akun gagal, terjadi masalah dengan server!')->withInput();
             }
         }else{
             return redirect('/register')->with('Error', 'Email telah terdaftar')->withInput();  
         }    
     }
 
+    public function isUserExists($email){
+        return User::where('email', $email)->exists();
+    }
     /**
-     * Account Check
+     * get user data
      * 
      * Method ini bertangung jawab untuk melakukan check akun yang terdaftar
      */
-    public function accountCheck($email){
+    public function getUser($email){
 
-        $users = User::select('email', 'account_type', 'password')->where('email', $email)->first();
+        $users = User::select('email', 'first_name', 'thumbnail', 'account_type', 'password')->where('email', $email)->first();
 
         return $users;
     }
@@ -98,29 +102,38 @@ class AuthController extends Controller
      * Authenticating Users and create their Session
      *
      */
-    public function emailAuthentication(Request $request)
+    public function login()
     {
-        $email = $request->input('email');
-        $password = $request->input('password');
+        #validation
+        $validation = validator(request()->all(), [
+            'email' => 'required|email',
+            'password' => 'required'
+        ], [
+            'email.required' => 'Email tidak boleh kosong', 
+            'email.email' => 'Email tidak valid',
+            'password.required' => 'Password tidak boleh kosong'
+        ]);
 
-        $account = $this->accountCheck($email);
+        $validation->validate();
 
-        if ($account == null) {
-            return redirect('/login')->with(['error' => 'Email kamu tidak terdaftar!!']);
-        }else if ($account->account_type == 'email') {
-            if (Hash::check($password, $account->password)) {
+        $email = request()->input('email');
+        $password = request()->input('password');
 
-                $session_create = $this->createUserSession($email);
-                
-                if ($session_create['msg_code'] == '0sc4p25') {
-                    return \redirect('/');
-                }   
+        $user = $this->getUser($email);
+
+        if (!$user){
+            return redirect('/login')->with('Error', 'Email kamu tidak terdaftar');
+        }else if ($user->account_type == 'email') {
+            if (Hash::check($password, $user->password)) {
+                $this->createUserSession($user);
+
+                return redirect('/');
             }else {
-                return redirect('/login')->with(['error' => 'Password yang anda masukan salah!!']);
+                return redirect('/login')->with('Error', 'Password yang anda masukan salah');
             }
-        }else if($account->account_type != 'email'){
-            return redirect('/login')->with(['error' => "Akun kamu tidak didaftarkan dengan email, silahkan login melalui Akun ". ucfirst($account->account_type)]);
-        }
+        }else if($user->account_type != 'email'){
+            return redirect('/login')->with('Error', "Akun kamu tidak didaftarkan dengan email, silahkan login melalui Akun ". ucfirst($user->account_type));
+        } 
     }
 
     public function thirdPartyAuthentication(Request $request){
@@ -136,7 +149,7 @@ class AuthController extends Controller
             'account_type' => $request->login_type,
         ];
 
-        $users = $this->accountCheck($email);
+        $users = $this->getUser($email);
 
         if($users == null){
 
@@ -175,18 +188,21 @@ class AuthController extends Controller
         }
     }
 
-    public function createUserSession($email){
-        $usersmodel = User::where('email', $email)->first();
+    /**
+     * Membuat sesi user
+     * 
+     * @param $user
+     */
+    public function createUserSession($user){
+        try {
+            Session::put('email', $user->email);
+            Session::put('first_name', $user->first_name);
+            Session::put('thumbnail', $user->thumbnail);
+            Session::put('status', 1);
 
-        Session::put('email', $usersmodel->email);
-        Session::put('first_name', $usersmodel->first_name);
-        Session::put('thumbnail', $usersmodel->thumbnail);
-        Session::put('status', 1);
-
-        return [
-            'message' => 'Session_Created_Successfully',
-            'msg_code' => '0sc4p25'
-        ];
+        } catch (Exception $e) {
+            throw new Exception("Gagal membuat user session");
+        }
     }
 
     public function thirdPartyRegister(Request $request){
@@ -203,7 +219,7 @@ class AuthController extends Controller
      */
     public function logout()
     {
-            Session::flush();
-            return \redirect('/');
+        Session::flush();
+        return \redirect('/');
     }
 }

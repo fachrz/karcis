@@ -13,7 +13,7 @@
     <div>
       <p class="login-title text-center">Login to Karcis</p>
     </div>
-    @if ($message = Session::get('error'))
+    @if ($message = Session::get('Error'))
       <div class="alert alert-danger alert-block">
         <button type="button" class="close" data-dismiss="alert">×</button> 
           <strong>{{ $message }}</strong>
@@ -39,19 +39,35 @@
       </div>
     </div> --}}
     {{-- <p class="login-info-text text-center">- OR USING EMAIL -</p> --}}
-    <form action="{{ url('/auth') }}" method="post" class="login-login-form">
+    <form action="{{ url('/login') }}" method="post" class="login-login-form">
       @csrf
-      <fieldset class="login-input-container">
-        <div class="login-input-item">
-          <input type="email" class="login-user-input-email login-user-input" name="email" placeholder="Your Email Address">
+      
+      <div class="login-input-container">
+        <div class="">
+          
         </div>
-        <div class="login-input-item">
-          <input type="password" class="login-user-input-password login-user-input" name="password" placeholder="Enter Password">
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" class="form-control login-input-item" name="email" placeholder="Your Email Address">
+          <small class="login-input-error">
+            @error('email')
+              {{ $message }}
+            @enderror
+          </small>
         </div>
-      </fieldset>
-      <fieldset class="login-login-button-container">
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" class="form-control login-input-item" name="password" placeholder="Enter Password">
+          <small class="login-input-error">
+            @error('password')
+              {{ $message }}
+            @enderror
+          </small>
+        </div>
+      </div>
+      <div class="login-login-button-container">
         <input type="submit" name="" class="login-login-button" value="Login">
-      </fieldset>
+      </div>
     </form>
     <div class="login-link-container">
       <a class="login-link" href="#">Forgot password?</a>

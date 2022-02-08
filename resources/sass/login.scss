@@ -15,11 +15,6 @@
     margin: 90px 0px 40px 0px;
 }
 
-.header-sprite {
-    background: url(https://cdn.myntassets.com/myx/images/header@2x-new16.a409d46af2e211afcaa82c1359787a90408024be.png) no-repeat 0 0;
-    background-size: 336px 48px
-}
-
 .login-logo {
     background-position: 0 0;
     margin-top: 30px;
@@ -70,6 +65,10 @@
     text-align: left
 }
 
+.login-input-error{
+    color: red;
+}
+
 .login-button:focus {
     outline: 0
 }
@@ -106,7 +105,6 @@
 
 .login-input-container {
     margin: 20px;
-    border: 1px solid #bfc0c6;
     border-radius: 5px;
     padding: 0
 }
@@ -121,18 +119,9 @@
 }
 
 .login-input-item {
-    position: relative
+    height: 50px;
 }
 
-.login-user-input {
-    display: block;
-    color: #282c3f;
-    padding-right: 40px;
-    font-size: 15px;
-    width: 100%;
-    border: 0;
-    padding: 15px
-}
 
 .login-user-input-email {
     border-top-left-radius: 5px;
