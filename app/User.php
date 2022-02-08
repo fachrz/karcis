@@ -3,13 +3,14 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class User extends Model
 {
+    use SoftDeletes;
+    
     protected $table = 'karcis_users';
-    protected $primaryKey = 'email';
-    public $incerementing = false;
-    protected $keyType = 'string';
+    protected $primaryKey = 'user_id';
     protected $fillable = [
         'email', 
         'password', 

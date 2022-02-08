@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\ForgotPassword;
 use Illuminate\Http\Request;
 use App\User;
 use Exception;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Str;
 class AuthController extends Controller
 {
     /*
@@ -75,7 +78,7 @@ class AuthController extends Controller
 
                 return redirect('/register')->with(['Success' => 'Registrasi Akun berhasil']);
             } catch (\Throwable $th) {
-                // return $th;
+                // throw $th;
                 return redirect('/register')->with('Error', 'Registrasi Akun gagal, terjadi masalah dengan server!')->withInput();
             }
         }else{
@@ -84,16 +87,16 @@ class AuthController extends Controller
     }
 
     public function isUserExists($email){
-        return User::where('email', $email)->exists();
+        return User::where('email', $email)->withTrashed()->exists();
     }
     /**
      * get user data
      * 
-     * Method ini bertangung jawab untuk melakukan check akun yang terdaftar
+     * Mendapatkan data user
      */
     public function getUser($email){
 
-        $users = User::select('email', 'first_name', 'thumbnail', 'account_type', 'password')->where('email', $email)->first();
+        $users = User::select('user_id', 'email', 'first_name', 'thumbnail', 'account_type', 'password')->where('email', $email)->first();
 
         return $users;
     }
@@ -221,5 +224,62 @@ class AuthController extends Controller
     {
         Session::flush();
         return \redirect('/');
+    }
+
+    /**
+     * Forgot Password page
+     * 
+     */
+    public function showForgotPage()
+    {
+        return view('forgot-page');
+    }
+
+    /**
+     * Proses lupa password
+     * 
+     */
+    public function forgotPassword()
+    {
+        $validation = validator(request()->all(), [
+            'email' => 'required|email'
+        ], [
+            'email.required' => 'Email tidak boleh kosong', 
+            'email.email' => 'Email tidak valid'
+        ]);
+
+        $validation->validate();
+
+        $user = $this->getUser(request()->input('email'));
+        if ($user) {
+            $randomString = Str::random(16);
+            $expr = now()->addMinutes(30);
+
+            if (!ForgotPassword::where('forgot_id', $randomString)->exists()) {
+                try {
+                    //register forgot request
+                    ForgotPassword::create([
+                        'forgot_id' => $randomString,
+                        'user_id' => $user->user_id,
+                        'expr' => $expr
+                    ]);
+
+                    ///send email
+                    Mail::send('Mail.ForgotPassword', [
+                        'forgot_id' => $randomString,
+                    ], function($message) use ($user){
+                        $message->to($user->email)->subject('Permintaan Lupa Password');
+
+                        $message->from('no-reply@karcis.com', 'no-reply');
+                    });
+
+                    return redirect('/forgot')->with('success', 'Permintaan udah dikirim, kamu bisa cek email kamu');
+                } catch (\Throwable $th) {
+                    throw $th;
+                }
+            }
+        }else {
+            return redirect('/forgot')->with('error', 'Email tidak terdaftar');
+        }        
     }
 }
