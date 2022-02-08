@@ -13,12 +13,11 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::get('/login', 'AuthController@showLoginForm');
-
 /* Authentication Route */
-Route::post('/auth', 'AuthController@emailAuthentication');
+Route::get('/login', 'AuthController@showLoginForm');
+Route::post('/login', 'AuthController@login');
 Route::get('/register', 'AuthController@showRegisterForm');
-Route::post('/registerrequest', 'AuthController@registerRequest');
+Route::post('/register', 'AuthController@register');
 Route::get('/logout', 'AuthController@logout');
 
 /* Third Party Authentication Route */
