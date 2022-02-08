@@ -70,7 +70,7 @@
       </div>
     </form>
     <div class="login-link-container">
-      <a class="login-link" href="#">Forgot password?</a>
+      <a class="login-link" href="{{ url('/forgot') }}">Forgot password?</a>
       <div class="login-right-links">
         <a class="login-create-account-link login-link" href="{{url('/register')}}">Create Account</a>
       </div>
