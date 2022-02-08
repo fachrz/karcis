@@ -18,6 +18,8 @@ Route::get('/login', 'AuthController@showLoginForm');
 Route::post('/login', 'AuthController@login');
 Route::get('/register', 'AuthController@showRegisterForm');
 Route::post('/register', 'AuthController@register');
+Route::get('/forgot', 'AuthController@showForgotPage');
+Route::post('/forgot', 'AuthController@forgotPassword');
 Route::get('/logout', 'AuthController@logout');
 
 /* Third Party Authentication Route */
