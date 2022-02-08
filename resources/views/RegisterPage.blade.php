@@ -48,43 +48,63 @@
       </div>
     </div> --}}
     {{-- <p class="register-info-text text-center">- OR USING EMAIL -</p> --}}
-    <form action="{{ url('/registerrequest') }}" method="post" class="register-register-form" id="register-form">
+    <form action="{{ url('/register') }}" method="post" class="register-register-form" id="register-form">
       @csrf
       <div class="register-input-container">
         <div class="form-group">
           <label for="email">Email</label>
-          <input type="email" name="email" class="form-control register-input-item" id="email" placeholder="Masukan Email" >
-          <small class="register-input-error" id="email-error"></small>
+          <input type="email" name="email" class="form-control register-input-item" id="email" placeholder="Masukan Email" value="{{ old('email') }}" >
+          <small class="register-input-error" id="email-error">
+            @error('email')
+              {{ $message }}
+            @enderror
+          </small>
         </div>
 
         <div class="form-group">
           <label for="first-name">First Name</label>
-          <input type="text" name="first-name" class="form-control register-input-item" id="first-name" aria-describedby="emailHelp" placeholder="Masukan Nama Depan" >
-          <small class="register-input-error" id="firstname-error"></small>
+          <input type="text" name="first_name" class="form-control register-input-item" id="first-name" aria-describedby="emailHelp" placeholder="Masukan Nama Depan" value="{{ old("first_name") }}">
+          <small class="register-input-error" id="firstname-error">
+            @error('first_name')
+                {{ $message }}
+            @enderror
+          </small>
         </div>
 
         <div class="form-group">
           <label for="last-name">Last Name</label>
-          <input type="text" name="last-name" class="form-control register-input-item" id="last-name" placeholder="Masukan Nama Belakang" >
+          <input type="text" name="last_name" class="form-control register-input-item" id="last-name" placeholder="Masukan Nama Belakang" value="{{ old("last_name") }}">
           <small class="register-input-error" id="lastname-error"></small>
         </div>
 
         <div class="form-group">
           <label for="no-telp">No Telepon</label>
-          <input type="text" name="telp" class="form-control register-input-item" id="no-telp" placeholder="Masukan Nomor Telepon" >
-          <small class="register-input-error" id="notelp-error"></small>
+          <input type="text" name="no_telp" class="form-control register-input-item" id="no-telp" placeholder="Masukan Nomor Telepon" value="{{ old("no_telp") }}">
+          <small class="register-input-error" id="notelp-error">
+            @error('no_telp')
+                {{ $message }}
+            @enderror
+          </small>
         </div>
 
         <div class="form-group">
           <label for="password">Password</label>
-          <input type="password" name="password" class="form-control register-input-item" id="password" placeholder="Masukan Password" >
-          <small class="register-input-error" id="password-error"></small>
+          <input type="password" name="password" class="form-control register-input-item" id="password" placeholder="Masukan Password" value="{{ old("password") }}">
+          <small class="register-input-error" id="password-error">
+            @error('password')
+                {{ $message }}
+            @enderror
+          </small>
         </div>
 
         <div class="form-group">
           <label for="confirm-password">Confirm Password</label>
-          <input type="password" name="confirm-password" class="form-control register-input-item" id="confirm-password" placeholder="Konfirmasi Password" >
-          <small class="register-input-error" id="confirmpassword-error"></small>
+          <input type="password" name="confirm_password" class="form-control register-input-item" id="confirm-password" placeholder="Konfirmasi Password">
+          <small class="register-input-error" id="confirmpassword-error">
+            @error('confirm_password')
+                {{ $message }}
+            @enderror
+          </small>
         </div>
       </div>
       <div class="register-register-button-container">
