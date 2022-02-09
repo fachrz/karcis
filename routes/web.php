@@ -18,9 +18,12 @@ Route::get('/login', 'AuthController@showLoginForm');
 Route::post('/login', 'AuthController@login');
 Route::get('/register', 'AuthController@showRegisterForm');
 Route::post('/register', 'AuthController@register');
+Route::get('/logout', 'AuthController@logout');
+
 Route::get('/forgot', 'AuthController@showForgotPage');
 Route::post('/forgot', 'AuthController@forgotPassword');
-Route::get('/logout', 'AuthController@logout');
+Route::get('/reset-password', 'AuthController@showResetpassPage');
+Route::post('/reset-password', 'AuthController@resetPassword');
 
 /* Third Party Authentication Route */
 Route::post('/login/tpa', 'AuthController@thirdPartyAuthentication');
