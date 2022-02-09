@@ -6,6 +6,7 @@ use App\ForgotPassword;
 use Illuminate\Http\Request;
 use App\User;
 use Exception;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
@@ -265,10 +266,13 @@ class AuthController extends Controller
                     ]);
 
                     ///send email
-                    Mail::send('Mail.ForgotPassword', [
+                    $subject = 'Permintaan Lupa Password';
+                    Mail::send('mails.ForgotPassword', [
                         'forgot_id' => $randomString,
-                    ], function($message) use ($user){
-                        $message->to($user->email)->subject('Permintaan Lupa Password');
+                        'subject' => $subject,
+                        'first_name' => $user->first_name
+                    ], function($message) use ($user, $subject){
+                        $message->to($user->email)->subject($subject);
 
                         $message->from('no-reply@karcis.com', 'no-reply');
                     });
@@ -281,5 +285,83 @@ class AuthController extends Controller
         }else {
             return redirect('/forgot')->with('error', 'Email tidak terdaftar');
         }        
+    }
+
+    /**
+     * Menampilkan reset password
+     * 
+     */
+    public function showResetPassPage()
+    {
+        $resetID = request()->input('id');
+
+        //validation
+        if (is_null($resetID)) {
+            abort(404, 'Page Not Found');
+        }
+
+        $forgotRequest = ForgotPassword::select('forgot_id', 'user_id', 'expr')->where('forgot_id', $resetID)->first();
+
+        if($forgotRequest){
+            if(now()->lessThanOrEqualTo($forgotRequest->expr)){
+                return view('reset-password', [
+                    'reset_id' => $resetID
+                ]);
+            }else {
+                abort(419, "Page Expired");
+            }
+        }else {
+            abort(404, 'Page Not Found');
+        }
+    }
+
+    /**
+     * Reset Password
+     * 
+     */
+    public function resetPassword(){
+        $forgotID = request()->input('forgot_id');
+
+        //validation
+        if (is_null($forgotID)) {
+            abort(404, 'Page Not Found');
+        }
+
+        $validation = validator(request()->all(), [
+            'new_password' => 'required', 
+            'confirm_new_password' => 'required|same:new_password'
+        ], [
+            'new_password.required' => 'Password Baru tidak boleh kosong',
+            'confirm_new_password.required' => 'Konfirmasi Password tidak boleh kosong',
+            'confirm_new_password.same' => 'Konfirmasi Password tidak sama'
+        ]);
+
+        $validation->validate();
+
+        try {
+            $forgotPassword = ForgotPassword::select('forgot_id', 'user_id', 'expr')->where('forgot_id', $forgotID)->first();
+
+            if ($forgotPassword) {
+                if (now()->lessThanOrEqualTo($forgotPassword->expr)) {
+                    DB::transaction(function() use ($forgotPassword, $forgotID){
+                        //ubah password
+                        User::where('user_id', $forgotPassword->user_id)->update([
+                            'password' => Hash::make(request()->input('new_password'))
+                        ]);
+
+                        //delete forgot request
+                        ForgotPassword::where('forgot_id', $forgotID)->delete();
+                    });
+
+                    return redirect()->back()->with('success', 'Password berhasil diubah');
+                }
+            }else{
+                abort(404, 'Page Not Found');
+            }
+        } catch (\Throwable $th) {
+            throw $th;
+        }
+        
+
     }
 }
