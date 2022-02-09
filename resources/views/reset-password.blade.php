@@ -1,6 +1,6 @@
 @extends('layouts.BlankTemplate')
 
-@section('pageTitle', 'Forgot Password')
+@section('pageTitle', 'Reset Password')
 
 @section('csslib')
     <link rel="stylesheet" href="{{ asset('css/login.css') }}">
